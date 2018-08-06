@@ -7,9 +7,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js"
   },
   "dependencies": {
+    "ejs": "^2.5.6",
     "express": "^4.15.2"
   },
   "devDependencies": {
@@ -18,13 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GauPanisset/burdipolis-app.git"
+    "url": "https://github.com/heroku/node-js-getting-started"
   },
   "keywords": [
     "node",
     "heroku",
     "express",
-    "Burdipolis"
+    "burdipolis"
   ],
   "license": "MIT"
 }
