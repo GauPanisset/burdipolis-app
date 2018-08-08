@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 });
 
 setInterval(function() {
-    http.get("http://<your app name>.herokuapp.com");
+    http.get("http://burdipolis-app.herokuapp.com");
 }, 300000);
 
 app.use('/products', require('./routes/products').router);
