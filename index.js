@@ -17,10 +17,6 @@ app.use((req, res, next) => {
     next();
 });
 
-setInterval(function() {
-    http.get("http://burdipolis-app.herokuapp.com");
-}, 300000);
-
 app.use('/products', require('./routes/products').router);
 app.use('/user', require('./routes/users').router);
 app.use('/send', require('./routes/contact').router);
