@@ -9,21 +9,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  
-  "dependencies": {
-    "bcrypt": "^3.0.0",
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "jsonwebtoken": "^8.3.0",
-    "mysql": "^2.16.0",
-    "nodemailer": "^4.6.7",
-    "passport": "^0.4.0",
-    "passport-http": "^0.3.0",
-  },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/GauPanisset/burdipolis-app"
@@ -34,5 +19,14 @@
     "express",
     "burdipolis"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "nodemailer": "^4.6.7",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "sqlite3": "^4.0.2"
+  }
 }
