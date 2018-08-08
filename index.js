@@ -1,6 +1,8 @@
 'use strict';
 const Express = require('express');
 const BP = require('body-parser');
+const http = require("http");
+
 const PORT = process.env.PORT || 8080
 
 const app = Express();
@@ -14,6 +16,10 @@ app.use((req, res, next) => {
 
     next();
 });
+
+setInterval(function() {
+    http.get("http://burdipolis-app.herokuapp.com");
+}, 300000);
 
 app.use('/products', require('./routes/products').router);
 app.use('/user', require('./routes/users').router);
