@@ -6,7 +6,7 @@ const router = Express.Router();
 
 //Display all products for managing : GET /products : SELECT * FROM PRODUCTS
 router.get('/', (req, res, next) => {
-    DB.all('SELECT * FROM PRODUCTS', (err, data) => {
+    DB.query('SELECT * FROM PRODUCTS', (err, data) => {
         if (err) {
             return next(err);
         }
@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 
 //Display all products of one category : GET /products/:category : SELECT * FROM PRODUCTS WHERE CATEGORY = ?
 router.get('/:category', (req, res, next) => {
-    DB.all('SELECT * FROM PRODUCTS WHERE CATEGORY = ?', [req.params.category], (err, data) => {
+    DB.query('SELECT * FROM PRODUCTS WHERE CATEGORY = ?', [req.params.category], (err, data) => {
         if(err) {
             return next(err);
         }
@@ -59,14 +59,14 @@ router.delete('/:id', Verif.verifyToken, (req, res, next) => {
 //Get the titles of product descriptions : GET /category/:id : SELECT * FROM CATEGORY WHERE ID = ?
 router.get('/category/:id', (req, res, next) => {
     if (req.params.id > 0) {
-        DB.all('SELECT * FROM CATEGORY WHERE ID = ?', [req.params.id], (err, data) => {
+        DB.query('SELECT * FROM CATEGORY WHERE ID = ?', [req.params.id], (err, data) => {
             if (err) {
                 return next(err);
             }
             return res.json(data);
         });
     } else {
-        DB.all('SELECT * FROM CATEGORY', (err, data) => {
+        DB.query('SELECT * FROM CATEGORY', (err, data) => {
             if(err) {
                 return next(err);
             }
