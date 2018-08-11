@@ -1,13 +1,51 @@
-const DB_NAME = 'tests-express-sqlite';
-const Fs = require('fs');
-const Path = require('path');
-const Sqlite = require('sqlite3');
+const mysql = require('mysql');
 
-const DB = new Sqlite.Database(DB_NAME);
+const url = process.env.CLEARDB_DATABASE_URL;
+//const url = "mysql://bba43b57d25079:712ed0dc@us-cdbr-iron-east-01.cleardb.net/heroku_526969b9ba26bf4?reconnect=true";
+                                                //mysql://user:password@host/database
+let config;
 
-if(!Fs.existsSync(`./${DB_NAME}`)){
-	const init = Fs.readFileSync(Path.join(process.cwd(), './data/database.sql'), 'utf-8');
-	DB.exec(init);
+if (url !== undefined) {
+    config = {
+        user: url.substring(url.indexOf("/") + 2, url.indexOf(":", url.indexOf("/"))),
+        password: url.substring(url.indexOf(":", url.indexOf("/")) + 1, url.indexOf("@")),
+        host: url.substring(url.indexOf("@") + 1, url.indexOf("/", url.indexOf("@"))),
+        database: url.substring(url.indexOf("/", url.indexOf("@")) + 1, url.indexOf("?"))
+    };
+    console.log(config);
+} else {
+	console.log("Can't find CLEARDB_DATABASE_URL")
 }
 
-module.exports = DB;
+let data;
+
+function handleDisconnect() {
+    data = mysql.createConnection(config);
+
+
+    data.connect(function(err) {
+        if(err) {
+            console.log('error when connecting to db:', err);
+            handleDisconnect();
+        } else {
+            console.log('connected');
+            setInterval(function() {
+                data.query('SELECT 1');
+            }, 5000);
+        }
+    });
+
+    data.on('error', function(err) {
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST' || err.fatal) {
+            handleDisconnect();
+        } else {
+            throw err;
+        }
+    });
+}
+
+handleDisconnect();
+
+module.exports = data;
+
