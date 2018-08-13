@@ -10,15 +10,16 @@ const Passport 	= require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
 
 Passport.use(new BasicStrategy((username,password,done)=>{
-
+    console.log(username + " === " + password);
     DB.query('SELECT * FROM USERS WHERE USERNAME=?',[username],(err,user)=>{
         if(err){//bad request
+            console.log("Error here");
             return done(err);
         }
         if(!user){//username not found
             return done(null,false,{message: "wrong username"});
         }
-
+        user = user[0];
         if(Bcrypt.compareSync(password, user.PASSWORD)){
             let token = jwt.sign({ id: user.USERNAME }, Verif.secret, {
                 expiresIn: 86400 //expires in 24 hours
