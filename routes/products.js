@@ -1,21 +1,8 @@
 const Express = require('express');
 const Verif = require('../verifyToken.js');
 const DB = require('../db.js');
-const multer = require('multer');
+const Storage = require('../storage.js');
 const path = require('path');
-
-const Storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'images');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  }
-});
-
- const upload = multer({
-     storage: Storage,
- });
 
 const router = Express.Router();
 
@@ -34,7 +21,7 @@ router.get('/image/:id', (req, res, next) => {
         if (err) {
             return next(err);
         }
-        res.sendFile(path.resolve('images/' + data[0].IMAGE));
+        res.sendFile(path.resolve('image/' + data[0].IMAGE));
     })
 });
 
@@ -59,7 +46,7 @@ router.post('/', Verif.verifyToken, (req, res, next) => {
   });
 });
 
-router.post('/image', Verif.verifyToken, upload.single('image'), (req, res, next) => {
+router.post('/image', Verif.verifyToken, Storage.upload.single('image'), (req, res, next) => {
   return res.end("Image uploaded");
 });
 
