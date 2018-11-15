@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
-const url = process.env.CLEARDB_DATABASE_URL;
-//const url = "mysql://ba3391a19308bb:9ce93ab1@us-cdbr-iron-east-01.cleardb.net/heroku_40ec11c48a3c8e6?reconnect=true";
+//const url = process.env.CLEARDB_DATABASE_URL;
+const url = "mysql://ba3391a19308bb:9ce93ab1@us-cdbr-iron-east-01.cleardb.net/heroku_40ec11c48a3c8e6?reconnect=true";
                                                 //mysql://user:password@host/database
 let config;
 

@@ -54,11 +54,10 @@ router.post('/', Verif.verifyToken, (req, res, next) => {
 });
 
 router.post('/image', Verif.verifyToken, Storage.upload.single('image'), (req, res, next) => {
-    console.log(req.body);
     const myFtp = new Client();
-    const name = path.resolve('image/'+ req.body.image);
+    const myPath = path.resolve('image/'+req.query.name);
     myFtp.on('ready', function() {
-        myFtp.put(name, "image/" + name, function (err) {
+        myFtp.put(myPath, '/image/'+req.query.name, function (err) {
             if (err) throw err;
             myFtp.end();
         });
