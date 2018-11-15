@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@types/bcrypt, @types/express, @types/express-session, @types/joi, @types/jsonwebtoken, @types/passport, @types/passport-http, @types/passport-local, @types/sqlite3}" />
+    <file url="PROJECT" libraries="{@types/express, @types/ftp}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

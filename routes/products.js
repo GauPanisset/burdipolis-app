@@ -3,8 +3,15 @@ const Verif = require('../verifyToken.js');
 const DB = require('../db.js');
 const Storage = require('../storage.js');
 const path = require('path');
+const Client = require('ftp');
 
 const router = Express.Router();
+
+const config = {
+  host: "home741403031.1and1-data.host",
+  user: "u93904710",
+  password: "352402fv96A??",
+};
 
 //Display all products for managing : GET /products : SELECT * FROM PRODUCTS
 router.get('/', (req, res, next) => {
@@ -47,7 +54,17 @@ router.post('/', Verif.verifyToken, (req, res, next) => {
 });
 
 router.post('/image', Verif.verifyToken, Storage.upload.single('image'), (req, res, next) => {
-  return res.end("Image uploaded");
+    console.log(req.body);
+    const myFtp = new Client();
+    const name = path.resolve('image/'+ req.body.image);
+    myFtp.on('ready', function() {
+        myFtp.put(name, "image/" + name, function (err) {
+            if (err) throw err;
+            myFtp.end();
+        });
+    });
+    myFtp.connect(config);
+    return res.end("Image uploaded");
 });
 
 //Change a product : PATCH /products/:title : UPDATE PRODUCTS SET IMAGE = ?, DESCRIPTION = ?, UTILISATION = ? WHERE TITLE = ?
