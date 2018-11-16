@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
         to: req.body.to,
         subject: "Burdipolis Website Message: " + req.body.subject,
         from: "Contact Form Request" + "<" + req.query.from + '>',
-        html:  "From: " + req.body.name + req.body.firstname + "<br>" +
+        html:  "From: " + req.body.name + " " + req.body.firstname + "<br>" +
         "User's email: " + req.body.user + "<br>" +
         "Message: " + req.body.text
     };
