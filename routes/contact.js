@@ -6,7 +6,7 @@ router.post('/', function (req, res) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
         to: 'burdipolis@gmail.com',
-        from: req.body.user,
+        from: 'aerocus.efher@gmail.com',
         subject: "Burdipolis Website Message : " + req.body.subject,
         text: req.body.text,
         html: "From: " + req.body.name + " " + req.body.firstname + "<br>" +
