@@ -13,7 +13,15 @@ router.post('/', function (req, res) {
             "User's email: " + req.body.user + "<br>" +
             "Message: " + req.body.text,
     };
-    sgMail.send(msg);
+    sgMail.send(msg, (error, result) => {
+        if (error) {
+            console.log(err);
+            res.end("error");
+        }
+        else {
+            res.end("sent");
+        }
+    });
 
 });
 
