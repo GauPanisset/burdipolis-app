@@ -11,7 +11,6 @@ const BasicStrategy = require('passport-http').BasicStrategy;
 
 Passport.use(new BasicStrategy((username,password,done)=>{
     DB.query('SELECT * FROM USERS WHERE USERNAME=?',[username],(err,user)=>{
-        console.log(user);
         if(err){//bad request
             console.log("Error here");
             return done(err);
