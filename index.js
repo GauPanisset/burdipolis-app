@@ -23,7 +23,7 @@ setInterval(function() {
 
 app.use('/products', require('./routes/products').router);
 app.use('/user', require('./routes/users').router);
-app.use('/send', require('./routes/ontact').router);
+app.use('/send', require('./routes/contact').router);
 
 app.listen(PORT, (err) => {
 
