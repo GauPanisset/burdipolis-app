@@ -10,7 +10,6 @@ const Passport 	= require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
 
 Passport.use(new BasicStrategy((username,password,done)=>{
-    console.log(username + " === " + password);
     DB.query('SELECT * FROM USERS WHERE USERNAME=?',[username],(err,user)=>{
         console.log(user);
         if(err){//bad request
