@@ -16,7 +16,7 @@ Passport.use(new BasicStrategy((username,password,done)=>{
             console.log("Error here");
             return done(err);
         }
-        if(!user){//username not found
+        if(user.length === 0){//username not found
             return done(null,false,{message: "wrong username"});
         }
         user = user[0];
